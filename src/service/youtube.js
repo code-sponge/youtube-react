@@ -7,7 +7,7 @@ class Youtube {
   async channel(id, videos) {
     const response = await this.youtube.get('channels', {
       params: {
-        part: 'snippet',
+        part: 'snippet, statistics',
         id,
       },
     });
@@ -38,7 +38,7 @@ class Youtube {
   async search(query) {
     const response = await this.youtube.get('search', {
       params: {
-        part: 'snippet, statistics',
+        part: 'snippet',
         maxResults: 24,
         type: 'video',
         q: query,

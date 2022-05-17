@@ -1,0 +1,19 @@
+.content {
+  display: flex;
+  background-color: #f9f9f9;
+  padding-top: 1.5em;
+}
+
+.detail {
+  flex: 1 1 70%;
+}
+
+.list {
+  flex: 1 1 30%;
+}
+
+@media screen and (max-width: 48rem) {
+  .content {
+    flex-direction: column;
+  }
+}

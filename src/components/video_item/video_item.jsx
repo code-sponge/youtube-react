@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from './video_item.module.css';
 
-const VideoItem = ({ video, video: { snippet } }) => {
+const VideoItem = ({ video, onSelect, display, video: { snippet } }) => {
+  const displayType = display === 'list' ? styles.list : styles.grid;
+
   let viewCount = video.statistics.viewCount;
   if (viewCount >= 10000) {
     viewCount = Math.floor(viewCount / 10000) + '만회';
@@ -30,22 +32,28 @@ const VideoItem = ({ video, video: { snippet } }) => {
     TimeDiff = difference_In_Date + '일전';
   }
 
+  const selectVideo = () => {
+    onSelect(video);
+  };
   return (
-    <li className={styles.contentWrap}>
-      <div className={styles.content}>
+    <li
+      className={`${styles.contentWrap} ${displayType}`}
+      onClick={selectVideo}
+    >
+      <div className={`${styles.content} ${displayType}`}>
         <img
-          className={styles.thumbnail}
+          className={`${styles.thumbnail} ${displayType}`}
           src={snippet.thumbnails.medium.url}
           alt="video thumbnail"
         />
         <div className={styles.under_thumbnail}>
           <img
-            className={styles.avatar}
+            className={`${styles.avatar} ${displayType}`}
             src={video.channelInfo.thumbnails.default.url}
             alt="channel thumbnail"
           />
           <div className={styles.text}>
-            <p className={styles.title}>{snippet.title}</p>
+            <p className={`${styles.title} ${displayType}`}>{snippet.title}</p>
             <div className={styles.channel}>
               <p className={styles.channel_title}>{snippet.channelTitle}</p>
               <div className={styles.view_upload}>
